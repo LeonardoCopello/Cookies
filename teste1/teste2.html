@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">Apagar</button>
+    <h1 id="mensagem">Bem vindo</h1>
+
+
+
+    <script>
+        //alert(document.cookie);
+
+        // var nomeUsuario = testaPrompt();
+
+        // function testaPrompt(){
+        // var nomeInserido = prompt('Qual o seu nome?');
+        // console.log(nomeInserido);
+        // if (nomeInserido == "") {
+        //     console.log('teste');
+        //     alert('Insira seu nome!');
+        //     console.log('hoo1');
+        //     testaPrompt();
+        //     }
+
+        // }
+        alert(document.cookie);
+        var nomeUsuario = "";
+        nomeUsuario = prompt('Qual o seu nome?');
+
+        while (nomeUsuario == "" || nomeUsuario == null) {
+            alert('Digite um nome');
+            nomeUsuario = prompt('Qual o seu nome?');
+
+        }
+
+        if (document.cookie != "") {
+            var nome = document.cookie.split('=');
+
+            if (nome[1] == nomeUsuario) {
+                document.getElementById('mensagem').innerHTML = `Bem vindo novamente ${nomeUsuario}.`
+            } else {
+                document.cookie = `username=${nomeUsuario}; expires=Thu, 18 Dec 2023 12:00:00 UTC`;
+                document.getElementById('mensagem').innerHTML =
+                    `Bem vindo ${nomeUsuario}, mas você não é primeiro a chegar.`
+            }
+        } else {
+            console.log('teste');
+            document.cookie = `username=${nomeUsuario}; expires=Thu, 18 Dec 2023 12:00:00 UTC`;
+            document.getElementById('mensagem').innerHTML = `Bem vindo ${nomeUsuario}, você é o primeiro a chegar.`;
+        }
+        
+        document.getElementById('btn').addEventListener('click', apagar);
+
+
+        function apagar() {
+            document.cookie = `username=; expires=Thu, 18 Dec 1970 12:00:00 UTC`;
+            document.cookie = `=null; expires=Thu, 18 Dec 1970 12:00:00 UTC`;
+
+            console.log(document.cookie);
+        }
+    </script>
+</body>
+
+</html>
