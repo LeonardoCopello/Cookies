@@ -15,33 +15,52 @@
 
 
     <script>
-        //alert(document.cookie);
-
-        // var nomeUsuario = testaPrompt();
-
-        // function testaPrompt(){
-        // var nomeInserido = prompt('Qual o seu nome?');
-        // console.log(nomeInserido);
-        // if (nomeInserido == "") {
-        //     console.log('teste');
-        //     alert('Insira seu nome!');
-        //     console.log('hoo1');
-        //     testaPrompt();
-        //     }
-
-        // }
+        /*
         alert(document.cookie);
-        var nomeUsuario = "";
-        nomeUsuario = prompt('Qual o seu nome?');
+
+        var nomeUsuario = testaPrompt();
+
+        function testaPrompt(){
+        var nomeUsuario = prompt('Qual o seu nome?');
+        // console.log(nomeUsuario);
+        if (nomeUsuario == "" || nomeUsuario == null) {
+            // console.log('teste');
+            alert('Insira seu nome!');
+            // console.log('hoo1');
+            testaPrompt();
+            }
+            return nomeUsuario;
+        }
+
+        console.log(nomeUsuario);
+        */
+
+
+        document.getElementById('btn').addEventListener('click', apagar);
+
+        alert(document.cookie);
+        
+        var nomeUsuario = prompt('Qual o seu nome?');
 
         while (nomeUsuario == "" || nomeUsuario == null) {
             alert('Digite um nome');
             nomeUsuario = prompt('Qual o seu nome?');
-
         }
 
         if (document.cookie != "") {
-            var nome = document.cookie.split('=');
+            testaNomeDigitado();
+
+        } else {
+            document.cookie = `username=${nomeUsuario}; expires=Thu, 18 Dec 2023 12:00:00 UTC`;
+            document.getElementById('mensagem').innerHTML = `Bem vindo ${nomeUsuario}, você é o primeiro a chegar.`;
+        }
+
+        function apagar() {
+            document.cookie = `username=; expires=Thu, 18 Dec 1970 12:00:00 UTC`;
+        }
+
+        function testaNomeDigitado() {
+        var nome = document.cookie.split('=');
 
             if (nome[1] == nomeUsuario) {
                 document.getElementById('mensagem').innerHTML = `Bem vindo novamente ${nomeUsuario}.`
@@ -50,20 +69,6 @@
                 document.getElementById('mensagem').innerHTML =
                     `Bem vindo ${nomeUsuario}, mas você não é primeiro a chegar.`
             }
-        } else {
-            console.log('teste');
-            document.cookie = `username=${nomeUsuario}; expires=Thu, 18 Dec 2023 12:00:00 UTC`;
-            document.getElementById('mensagem').innerHTML = `Bem vindo ${nomeUsuario}, você é o primeiro a chegar.`;
-        }
-        
-        document.getElementById('btn').addEventListener('click', apagar);
-
-
-        function apagar() {
-            document.cookie = `username=; expires=Thu, 18 Dec 1970 12:00:00 UTC`;
-            document.cookie = `=null; expires=Thu, 18 Dec 1970 12:00:00 UTC`;
-
-            console.log(document.cookie);
         }
     </script>
 </body>
